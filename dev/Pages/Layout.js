@@ -1,12 +1,11 @@
 import React from 'react';
 
-import Content    from './../components/Content/index';
-import Footer     from './../components/Footer/index';
-import Header     from './../components/Header/index';
-import Navigation from './../components/Navigation/index';
+import Content    from '../Components/Content/index';
+import Footer     from '../Components/Footer/index';
+import Header     from '../Components/Header/index';
+import Navigation from '../Components/Navigation/index';
 
 export default class Layout extends React.Component {
-
   render(){
     const title = "Some Website";
     return(
@@ -14,7 +13,7 @@ export default class Layout extends React.Component {
         <Header title={title}/>
         <Navigation />
         <Content children={this.props.children}/>
-        <Footer title={title}/>
+        <Footer/>
       </div>
     );
   }
