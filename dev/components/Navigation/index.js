@@ -3,11 +3,10 @@ import { Link } from 'react-router';
 
 export default class Navigation extends React.Component {
   render(){
-    const linkStyle = {
-      marginLeft: '10px'
-    };
+    const floatRight = { float: "right" };
+    const linkStyle = { marginLeft: "10px" };
     return(
-      <nav>
+      <nav style={floatRight}>
         <ul>
           <Link style={linkStyle} to='/'>Home</Link>
           <Link style={linkStyle} to='about'>About</Link>

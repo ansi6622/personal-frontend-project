@@ -1,18 +1,11 @@
 import React from "react";
 
-class Title extends React.Component {
-  render(){
-    return(
-      <h1>{this.props.title}</h1>
-    )
-  }
-}
-
 export default class Header extends React.Component {
   render(){
+    const floatLeft = { float: "left" };
     return(
-      <header>
-        <Title title={this.props.title}/>
+      <header style={floatLeft}>
+        <h1>{this.props.title}</h1>
       </header>
     )
   }

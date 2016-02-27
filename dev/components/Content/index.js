@@ -2,8 +2,9 @@ import React from 'react';
 
 export default class Content extends React.Component {
   render(){
+    const clearBoth = { clear: "both" };
     return(
-      <main >
+      <main style={clearBoth}>
         {this.props.children}
       </main>
     )
