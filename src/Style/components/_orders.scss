@@ -1,0 +1,90 @@
+.order-container{
+  clear: both;
+  border: 1px solid black;
+}
+
+
+
+.order-form{
+  width: 400px;
+  margin: 0 auto;
+  position: relative;
+
+  input{
+    width: inherit;
+    font-size: 2em;
+    display: block;
+  }
+
+  .submit-order{
+    position: relative;
+    left: 0.7%;
+    width: inherit;
+    //width: 6em;
+    height: 2em;
+    margin: 0 auto;
+    font-size: 1.1em;
+  }
+}
+
+table{
+  margin: 30px auto 0;
+  position: relative;
+  width: 800px;
+  background: white;
+  font-weight: 300;
+
+  h3{
+    text-align: center;
+    font-weight: 400;
+  }
+
+  .order{
+    border-radius: 2px;
+  }
+
+  td{
+    min-width: 200px;
+    border-top: 1px solid rgba(0, 0, 0, 0.44);
+    border-left: 1px solid rgba(0, 0, 0, 0.44);
+    border-radius: 5px 0 0 5px;
+
+    span{
+      font-size: 2em;
+      margin-left: 10px;
+      display: block;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+  }
+  .button-col{
+    position: relative;
+    min-width: 50px;
+    border: none;
+
+    .delete-item{
+      position: relative;
+      right: 50%;
+      bottom: 20px;
+      width: 2em;
+      height: 2em;
+      font-size: 1em;
+      background: #353535;
+      color: white;
+      outline: none;
+      border-width: 0.5px;
+      border-radius: 45%;
+      padding: 1%;
+      -webkit-transition: all 0.1s ease-in;
+      transition: all 0.1s ease-in;
+
+      &:hover{
+        background: #767676;
+      }
+      &:active{
+        color: rgba(166, 34, 20, 0.87);
+        background: #bcbcbc;
+      }
+    }
+  }
+}

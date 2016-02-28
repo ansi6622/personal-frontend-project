@@ -6,7 +6,7 @@ export default class Home extends React.Component {
     return(
       <div>
         <h2>Home Page</h2>
-        <Orders />
+        <Orders url='/api/orders' pollInterval={3000} />
       </div>
     )
   }

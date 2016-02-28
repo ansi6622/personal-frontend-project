@@ -14,7 +14,6 @@ export default class Footer extends React.Component {
           <li style={liStyle}>Footer</li>
           <li style={liStyle}><Link to="contact" >Contact</Link></li>
         </ul>
-
       </footer>
     )
   }
