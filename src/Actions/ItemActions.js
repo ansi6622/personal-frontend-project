@@ -6,10 +6,10 @@ export function addItem(name){
     name
   })
 }
-export function removeItem(id){
+export function removeItem(idx){
   dispatcher.dispatch({
     type: 'REMOVE_ITEM',
-    id
+    idx
   })
 }
 export function reloadItems(){
@@ -18,11 +18,13 @@ export function reloadItems(){
     dispatcher.dispatch({type: "GOT_ITEMS", items: [
       {
         id: 14330228,
+        idx: 0,
         name: "Chicken",
         complete: false
       },
       {
         id: 1456588888,
+        idx: 1,
         name: "Fingers",
         complete: false
       }

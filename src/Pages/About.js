@@ -1,7 +1,7 @@
 import React from 'react';
 
 import * as ItemActions from '../Actions/ItemActions';
-import ItemStore from '../Stores/ItemStore.js'
+import ItemStore from '../Stores/ItemStore.js';
 
 export default class About extends React.Component{
   constructor(){
@@ -18,11 +18,12 @@ export default class About extends React.Component{
       })
     })
   }
-
   addItem(){
-    ItemActions.addItem(Date.now())
+    ItemActions.addItem('Another Item')
   }
-
+  removeItem(idx){
+    ItemActions.removeItem(idx);
+  }
   reloadItems(){
     ItemActions.reloadItems();
   }
@@ -37,6 +38,7 @@ export default class About extends React.Component{
         <h3>More items...</h3>
         <button onClick={this.reloadItems.bind(this)}>Reload</button>
         <button onClick={this.addItem.bind(this)}>Add</button>
+        <button onClick={this.removeItem.bind(this)}>Remove</button>
         <ul>{itemArray}</ul>
       </div>
     )
