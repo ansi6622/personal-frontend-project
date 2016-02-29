@@ -2,10 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
-import Layout  from "./Pages/Layout"
-import Home    from "./Pages/Home"
-import About   from "./Pages/About"
-import Contact from "./Pages/Contact"
+import Layout  from "./../Components/Layout"
+import Home    from "./../Pages/Home"
+import About   from "./../Pages/About"
+import Contact from "./../Pages/Contact"
 
 const app = document.getElementById('app');
 

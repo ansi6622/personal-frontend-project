@@ -1,9 +1,8 @@
 .order-container{
   clear: both;
-  border: 1px solid black;
+  border: 1px solid #5d5d5d;
+  @include border-radius(10px);
 }
-
-
 
 .order-form{
   width: 400px;
@@ -20,7 +19,6 @@
     position: relative;
     left: 0.7%;
     width: inherit;
-    //width: 6em;
     height: 2em;
     margin: 0 auto;
     font-size: 1.1em;
@@ -33,11 +31,6 @@ table{
   width: 800px;
   background: white;
   font-weight: 300;
-
-  h3{
-    text-align: center;
-    font-weight: 400;
-  }
 
   .order{
     border-radius: 2px;
@@ -57,34 +50,35 @@ table{
       user-select: none;
     }
   }
-  .button-col{
+}
+
+.button-col{
+  position: relative;
+  min-width: 50px;
+  border: none;
+
+  button{
     position: relative;
-    min-width: 50px;
-    border: none;
+    right: 50%;
+    bottom: 20px;
+    width: 2em;
+    height: 2em;
+    font-size: 1em;
+    background: #353535;
+    color: white;
+    outline: none;
+    border-width: 0.5px;
+    border-radius: 45%;
+    padding: 1%;
+    -webkit-transition: all 0.1s;
+    transition: all 0.1s;
 
-    .delete-item{
-      position: relative;
-      right: 50%;
-      bottom: 20px;
-      width: 2em;
-      height: 2em;
-      font-size: 1em;
-      background: #353535;
-      color: white;
-      outline: none;
-      border-width: 0.5px;
-      border-radius: 45%;
-      padding: 1%;
-      -webkit-transition: all 0.1s ease-in;
-      transition: all 0.1s ease-in;
-
-      &:hover{
-        background: #767676;
-      }
-      &:active{
-        color: rgba(166, 34, 20, 0.87);
-        background: #bcbcbc;
-      }
+    &:hover{
+      background: #565656;
+    }
+    &:active{
+      color: #000000;
+      background: #ffffff;
     }
   }
 }

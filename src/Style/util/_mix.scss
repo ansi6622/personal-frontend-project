@@ -1,0 +1,197 @@
+
+/**
+*  -----------------------------------------------------------
+*                           SHADOWS
+*  -----------------------------------------------------------
+*/
+
+@mixin box-shadow($top, $left, $right, $blur, $color, $inset: false) {
+  @if $inset {
+    -webkit-box-shadow:inset $top $left $right $blur $color;
+    -moz-box-shadow:inset $top $left $right $blur $color;
+    -ms-box-shadow:inset $top $left $right $blur $color;
+    -o-box-shadow:inset $top $left $right $blur $color;
+    box-shadow:inset $top $left $right $blur $color;
+  } @else {
+    -webkit-box-shadow: $top $left $right $blur $color;
+    -moz-box-shadow: $top $left $right $blur $color;
+    -ms-box-shadow: $top $left $right $blur $color;
+    -o-box-shadow: $top $left $right $blur $color;
+    box-shadow: $top $left $right $blur $color;
+  }
+}
+
+@mixin text-shadow($top, $left, $blur, $color, $inset: false) {
+  @if $inset {
+    -webkit-text-shadow:inset $top $left $blur $color;
+    -moz-text-shadow:inset $top $left $blur $color;
+    -ms-text-shadow:inset $top $left $blur $color;
+    -o-text-shadow:inset $top $left $blur $color;
+    text-shadow:inset $top $left $blur $color;
+  } @else {
+    -webkit-text-shadow: $top $left $blur $color;
+    -moz-text-shadow: $top $left $blur $color;
+    -ms-text-shadow: $top $left $blur $color;
+    -o-text-shadow: $top $left $blur $color;
+    text-shadow: $top $left $blur $color;
+  }
+}
+
+
+/**
+*  -----------------------------------------------------------
+*                         GRADIENT
+*  -----------------------------------------------------------
+*/
+
+@mixin gradient($one, $two, $three, $four, $five){
+  background: -webkit-linear-gradient($one, $two, $three, $four, $five);
+  background: -moz-linear-gradient($one, $two, $three, $four, $five);
+  background: -ms-linear-gradient($one, $two, $three, $four, $five);
+  background: -o-linear-gradient($one, $two, $three, $four, $five);
+  background: linear-gradient($one, $two, $three, $four, $five);
+}
+
+@mixin gradient-2($one, $two, $three){
+  background: -webkit-linear-gradient($one, $two, $three);
+  background: -moz-linear-gradient($one, $two, $three);
+  background: -ms-linear-gradient($one, $two, $three);
+  background: -o-linear-gradient($one, $two, $three);
+  background: linear-gradient($one, $two, $three);
+}
+
+
+/**
+*  -----------------------------------------------------------
+*                         FLEX BOX
+*  -----------------------------------------------------------
+*/
+
+@mixin display($value){
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+@mixin flex-direction($direction){
+  -webkit-flex-direction: $direction;
+  -ms-flex-direction: $direction;
+  -o-flex-direction: $direction;
+  flex-direction: $direction;
+
+}
+
+@mixin justify-content($content){
+  -webkit-justify-content: $content;
+  -moz-justify-content: $content;
+  -ms-justify-content: $content;
+  -o-justify-content: $content;
+  justify-content: $content;
+
+}
+
+@mixin align-content($content){
+  -webkit-align-content: $content;
+  -moz-align-content: $content;
+  -ms-align-content: $content;
+  -o-align-content: $content;
+  align-content: $content;
+
+}
+
+@mixin align-items($content){
+  -webkit-align-items: $content;
+  -moz-align-items: $content;
+  -ms-align-items: $content;
+  -o-align-items: $content;
+  align-items: $content;
+
+}
+
+@mixin align-self($content){
+  -webkit-align-self: $content;
+  -moz-align-self: $content;
+  -ms-align-self: $content;
+  -o-align-self: $content;
+  align-self: $content;
+
+}
+
+@mixin flex-grow($grow){
+  -webkit-flex-grow: $grow;
+  -moz-flex-grow: $grow;
+  -ms-flex-grow: $grow;
+  -o-flex-grow: $grow;
+  flex-grow: $grow;
+
+}
+
+@mixin flex-flow($flow){
+  -webkit-flex-flow: $flow;
+  -moz-flex-flow: $flow;
+  -ms-flex-flow: $flow;
+  -o-flex-flow: $flow;
+  flex-flow: $flow;
+
+}
+
+@mixin flex-wrap($wrap){
+  -webkit-flex-wrap: $wrap;
+  -moz-flex-wrap: $wrap;
+  -ms-flex-wrap: $wrap;
+  -o-flex-wrap: $wrap;
+  flex-wrap: $wrap;
+
+}
+
+@mixin flex($flex){
+  -webkit-box-flex: $flex;
+  -moz-box-flex: $flex;
+  -webkit-flex: $flex;
+  -ms-flex: $flex;
+  flex: $flex;
+
+}
+
+
+@mixin order($num){
+  -webkit-order: $num;
+  -moz-order: $num;
+  order: $num;
+}
+
+
+
+/**
+*  -----------------------------------------------------------
+*                         ROUNDED CORNERS
+*  -----------------------------------------------------------
+*/
+
+@mixin border-radius($radius){
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  -o-border-radius: $radius;
+  border-radius: $radius;
+
+}
+
+
+
+/**
+*  -----------------------------------------------------------
+*                         TRANSITION
+*  -----------------------------------------------------------
+*/
+
+@mixin transition($type){
+  -webkit-transition: $type;
+  -mos-transition: $type;
+  -ms-transition: $type;
+  -o-transition: $type;
+  transition: $type;
+
+}

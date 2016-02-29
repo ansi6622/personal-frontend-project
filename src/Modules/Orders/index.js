@@ -55,8 +55,7 @@ export default class Orders extends React.Component {
   }
   componentDidMount(){
     this.loadOrders();
-    // TODO - setInterval(this.loadOrders, this.props.pollInterval);
-
+    // TODO setInterval(this.loadOrders, this.props.pollInterval);
   }
   render(){
     return(
@@ -78,7 +77,7 @@ class OrderList extends React.Component {
       </Order>
     );
     return(
-      <div className="orderList">
+      <div className="order-list">
         <table>
           <tbody>
             {orderNodes}
@@ -107,10 +106,7 @@ class OrderForm extends React.Component {
     let name   = this.state.name;
     let option = this.state.option;
     let price  = this.state.price;
-
-    if(!price || !option || !name)
-      return;
-
+    if(!price || !option || !name) return;
     this.props.onOrderSubmit({name: name, option: option, price: price});
     this.setState({name: '', option: '', price: ''})
   }

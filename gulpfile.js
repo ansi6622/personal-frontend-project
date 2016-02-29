@@ -2,7 +2,7 @@ var gulp   = require('gulp');
 var sass   = require('gulp-sass');
 
 gulp.task('sass', function(){
-  gulp.src('src/Style/main.Style')
+  gulp.src('src/Style/main.scss')
     .pipe(sass({
       outputStyle: 'compressed'
     }))
@@ -10,7 +10,7 @@ gulp.task('sass', function(){
 });
 
 gulp.task('watch', function(){
-  gulp.watch('src/Style/**/*Style',['sass'])
+  gulp.watch('src/Style/**/*.scss',['sass'])
 });
 
 gulp.task('default', ['sass', 'watch']);

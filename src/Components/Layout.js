@@ -1,13 +1,13 @@
 import React from 'react';
 
-import Content    from '../Components/Content/index';
-import Footer     from '../Components/Footer/index';
-import Header     from '../Components/Header/index';
-import Navigation from '../Components/Navigation/index';
+import Content    from './Content/index';
+import Footer     from './Footer/index';
+import Header     from './Header/index';
+import Navigation from './Navigation/index';
 
 export default class Layout extends React.Component {
   render(){
-    const title = "Some Website";
+    const title = "Cash Register";
     return(
       <div>
         <Header title={title}/>
