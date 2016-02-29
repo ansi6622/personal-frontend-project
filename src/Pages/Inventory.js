@@ -3,14 +3,26 @@ import React from 'react';
 import * as ItemActions from '../Actions/ItemActions';
 import ItemStore from '../Stores/ItemStore.js';
 
-export default class About extends React.Component{
+class Items extends React.Component {
+  render(){
+    return(
+      <tr>
+        <td>{this.props.name}</td>
+        <td>{this.props.type}</td>
+        <td>{this.props.count}</td>
+      </tr>
+    )
+  }
+
+}
+
+export default class Inventory extends React.Component{
   constructor(){
     super();
     this.state = {
       items: ItemStore.getAll()
     }
   }
-
   componentWillMount(){
     ItemStore.on('change', () =>{
       this.setState({
@@ -19,7 +31,7 @@ export default class About extends React.Component{
     })
   }
   addItem(){
-    ItemActions.addItem('Another Item')
+    ItemActions.addItem('Chicken Wings', 'BBQ', 50)
   }
   removeItem(idx){
     ItemActions.removeItem(idx);
@@ -31,15 +43,19 @@ export default class About extends React.Component{
   render(){
     const { items } = this.state;
     const itemArray = items.map((item) =>{
-      return <li key={item.id}>{item.name}</li>
+      return <Items
+        key={item.id}
+        name={item.name}
+        type={item.type}
+        count={item.count} />
     });
     return(
       <div>
-        <h3>More items...</h3>
+        <h3>Inventory</h3>
         <button onClick={this.reloadItems.bind(this)}>Reload</button>
         <button onClick={this.addItem.bind(this)}>Add</button>
         <button onClick={this.removeItem.bind(this)}>Remove</button>
-        <ul>{itemArray}</ul>
+        <table><tbody>{itemArray}</tbody></table>
       </div>
     )
   }

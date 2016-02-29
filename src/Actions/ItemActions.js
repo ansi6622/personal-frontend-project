@@ -1,21 +1,24 @@
 import dispatcher from "../Dispatch/dispatcher";
 
-export function addItem(name){
+export function addItem(name, type, count){
   dispatcher.dispatch({
-    type: 'ADD_ITEM',
-    name
+    title: 'ADD_ITEM',
+    name,
+    type,
+    count
+
   })
 }
 export function removeItem(idx){
   dispatcher.dispatch({
-    type: 'REMOVE_ITEM',
+    title: 'REMOVE_ITEM',
     idx
   })
 }
 export function reloadItems(){
-  dispatcher.dispatch({type: "FETCH_ITEMS"});
+  dispatcher.dispatch({title: "FETCH_ITEMS"});
   setTimeout(() =>{
-    dispatcher.dispatch({type: "GOT_ITEMS", items: [
+    dispatcher.dispatch({title: "GOT_ITEMS", items: [
       {
         id: 14330228,
         idx: 0,

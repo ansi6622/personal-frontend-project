@@ -53,7 +53,7 @@ export default class Orders extends React.Component {
       }
     })
   }
-  componentDidMount(){
+  componentWillMount(){
     this.loadOrders();
     // TODO setInterval(this.loadOrders, this.props.pollInterval);
   }

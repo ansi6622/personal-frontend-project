@@ -12,12 +12,41 @@ app.use('/', express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-
 app.use(function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Cache-Control', 'no-cache');
   next();
 });
+
+var knex = require('knex')(require('./knexfile')['development']);
+
+app.get('/new-orders', function(req,res,next){
+  knex('orders').insert({'name': 'coffee', 'option': '16oz', 'price': 1})
+    .then(function(res){
+    }).then(function(){
+    knex('orders').then(function (results) {
+      res.json(results);
+      console.log(results);
+    }).then(function(){
+      knex('orders').del().then(function(res){})
+    })
+  })
+});
+
+app.get('/inventory', function(req,res,next){
+
+  knex('inventory').insert({'name': 'Coffee Cups', 'type': '16oz', 'count': 1})
+    .then(function(res){
+    }).then(function(){
+    knex('inventory').then(function (results) {
+      res.json(results);
+      console.log(results);
+    }).then(function(){
+      knex('inventory').del().then(function(res){})
+    })
+  })
+});
+
 
 app.get('/api/orders', function(req, res){
   fs.readFile(ORDERS_FILE, function(err, data){

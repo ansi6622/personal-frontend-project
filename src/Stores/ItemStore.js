@@ -10,24 +10,38 @@ class ItemStore extends EventEmitter{
         id: 145647660228,
         idx: 0,
         name: "Ice Cream",
+        type: "Vanilla",
+        count: 10,
         complete: false
       },
       {
         id: 145456888,
         idx: 1,
-        name: "Burrito",
+        name: "Coffee Cups",
+        type: "16oz",
+        count: 200,
+        complete: true
+      },
+      {
+        id: 14549888,
+        idx: 3,
+        name: "Coffee Cups",
+        type: "8oz",
+        count: 150,
         complete: true
       }
     ]
   }
 
-  addItem(name){
+  addItem(name, type, count){
     const id = Date.now();
     let idx = this.items.length + 1;
     this.items.unshift({
       id,
       idx,
       name,
+      type,
+      count,
       complete: false
     });
     this.emit('change');
@@ -43,9 +57,9 @@ class ItemStore extends EventEmitter{
   }
 
   handleActions(action){
-    switch(action.type){
+    switch(action.title){
       case "ADD_ITEM":{
-        this.addItem(action.name);
+        this.addItem(action.name, action.type, action.count);
       }break;
 
       case "REMOVE_ITEM": {
