@@ -32,7 +32,6 @@ class ItemStore extends EventEmitter{
       }
     ]
   }
-
   addItem(name, type, count){
     const id = Date.now();
     let idx = this.items.length + 1;
@@ -46,16 +45,13 @@ class ItemStore extends EventEmitter{
     });
     this.emit('change');
   }
-
   removeItem(idx){
     this.items.splice(idx, 1);
     this.emit('change');
   }
-
   getAll(){
     return this.items;
   }
-
   handleActions(action){
     switch(action.title){
       case "ADD_ITEM":{

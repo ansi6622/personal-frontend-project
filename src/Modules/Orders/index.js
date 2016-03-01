@@ -16,8 +16,8 @@ class Order extends React.Component {
   }
 }
 export default class Orders extends React.Component {
-  constructor(props){
-    super(props);
+  constructor(){
+    super();
     this.state ={ data: [] };
   }
   loadOrders(){
@@ -55,7 +55,7 @@ export default class Orders extends React.Component {
   }
   componentWillMount(){
     this.loadOrders();
-    // TODO setInterval(this.loadOrders, this.props.pollInterval);
+    setInterval(this.loadOrders.bind(this), this.props.pollInterval);
   }
   render(){
     return(
@@ -73,7 +73,7 @@ class OrderList extends React.Component {
         name={order.item.name}
         option={order.item.option}
         price={order.item.price}
-        key={order.id}  >
+        key={i}  >
       </Order>
     );
     return(
@@ -117,18 +117,21 @@ class OrderForm extends React.Component {
         <input
           type="text"
           placeholder="Item Name"
+          name="name"
           value={this.state.name}
           onChange={this.handleItemChange.bind(this)}
         />
         <input
           type="text"
           placeholder="Option"
+          name="option"
           value={this.state.option}
           onChange={this.handleOptionChange.bind(this)}
         />
         <input
           type="text"
           placeholder="Price"
+          name="price"
           value={this.state.price}
           onChange={this.handlePriceChange.bind(this)}
         />
