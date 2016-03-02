@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from 'react-router';
 
 const Footer = () => {
-
   const liStyle = {
     display: "inline",
     marginLeft: '10px'
