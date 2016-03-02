@@ -1,27 +1,19 @@
 import { EventEmitter } from 'events';
+
 import dispatcher from '../Dispatch/dispatcher';
 
 class ItemStore extends EventEmitter{
   constructor(){
     super();
-    this.items = []
+    this.orders = []
   }
-  loadItems(items){
-    this.items = items;
-    this.emit('change');
-    console.log('item store loadItems: ', this.items);
+  loadOrders(){
+    // TODO
   }
-  addItem(title, type, qty){
-    const id = Date.now();
-    let idx = this.items.length + 1;
-    this.items.unshift({
-      id,
-      idx,
-      title,
-      type,
-      qty,
-      complete: false
-    });
+  handleOrderSubmit(){
+    let orders = this.state.data;
+    order.id = Date.now();
+    let newOrders = orders.concat({orders});
     this.emit('change');
   }
   removeItem(idx){
@@ -29,23 +21,25 @@ class ItemStore extends EventEmitter{
     this.emit('change');
   }
   getAll(){
-    console.log('item store getAll: ', this.items);
     return this.items;
   }
   handleActions(action){
-    switch(action.pass){
-
+    switch(action.title){
       case 'LOAD_ITEMS':{
-        this.loadItems(action.items);
-        console.log('item store handleActions loadItems: ', this.items)
+        this.loadItems(action.data)
       }break;
 
       case "ADD_ITEM":{
-        this.addItem(action.title, action.type, action.qty);
+        this.addItem(action.name, action.type, action.count);
       }break;
 
       case "REMOVE_ITEM": {
         this.removeItem(action.idx);
+      }break;
+
+      case "GOT_ITEMS": {
+        this.items = action.items;
+        this.emit('change');
       }
     }
   }

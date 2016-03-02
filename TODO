@@ -3,5 +3,3 @@
 
 - create OrderActions and OrderStore
 - link OrderActions to DB collection
-
-- Figure out why

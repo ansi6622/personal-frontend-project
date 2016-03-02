@@ -4,6 +4,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 
+
 var ORDERS_FILE = path.join(__dirname, 'orders.json');
 
 app.set('port', (process.env.PORT || 3000));
@@ -20,6 +21,14 @@ app.use(function(req, res, next) {
 
 
 var knex = require('knex')(require('./knexfile')['development']);
+
+app.get('/items', function(req,res,next){
+  knex.select().table('items').then(function(rows) {
+    res.json(rows);3
+  }).catch(function (err) {
+    next(new Error(err));
+  });
+});
 
 app.post('/new-orders', function(req,res,next){
   knex('orders').insert({'name': req.body.name, 'option': req.body.option, 'price': req.body.price})
@@ -41,8 +50,6 @@ app.post('/inventory', function(req,res,next){
     knex('inventory').then(function (results) {
       res.json(results);
       console.log(results);
-    }).then(function(){
-      knex('inventory').del().then(function(res){})
     })
   })
 });
@@ -57,7 +64,6 @@ app.get('/api/orders', function(req, res){
     res.json(JSON.parse(data));
   });
 });
-
 
 app.post('/api/orders', function(req, res){
   fs.readFile(ORDERS_FILE, function(err, data){
@@ -86,7 +92,6 @@ app.post('/api/orders', function(req, res){
       })
   })
 });
-
 
 app.listen(app.get('port'), function() {
   console.log('Server started: http://localhost:' + app.get('port') + '/');

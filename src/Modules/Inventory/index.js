@@ -1,5 +1,4 @@
 import React from 'react';
-
 import * as ItemActions from '../../Actions/ItemActions';
 import ItemStore from '../../Stores/ItemStore.js';
 
@@ -7,9 +6,9 @@ class Items extends React.Component {
   render(){
     return(
       <tr>
-        <td>{this.props.name}</td>
+        <td>{this.props.title}</td>
         <td>{this.props.type}</td>
-        <td>{this.props.count}</td>
+        <td>{this.props.qty}</td>
       </tr>
     )
   }
@@ -17,32 +16,46 @@ class Items extends React.Component {
 export default class InventoryItems extends React.Component{
   constructor(){
     super();
-    this.state = {
-      items: ItemStore.getAll()
-    }
+    this.getItems = this.getItems.bind(this);
+    this.state = { items: [] };
+    console.log('comp initial state: ', this.state.items);
   }
   componentWillMount(){
-    ItemStore.on('change', () =>{
+    ItemStore.on('change', this.getItems);
+    console.log('comp will mount: ', this.state.items);
+  }
+  componentWillUnmount(){
+    ItemStore.removeListener("change", this.getItems);
+  }
+  componentDidMount(){
       this.setState({
-        items: ItemStore.getAll()
-      })
+        items: this.loadItems()
+      });
+    console.log('comp did mount: ', this.state.items);
+  }
+  getItems(){
+    this.setState({
+      items: ItemStore.getAll()
     })
   }
+  loadItems(){
+    ItemActions.loadItems();
+  }
   addItem(){
-    ItemActions.addItem('Chicken Wings', 'BBQ', 50)
+    ItemActions.addItem('Chicken Wings', 'BBQ', 50);
   }
   removeItem(idx){
     ItemActions.removeItem(idx);
   }
-  reloadItems(){
-    ItemActions.reloadItems();
-  }
   render(){
+    console.log('inside comp state render: ', this.state.items);
     return(
-      <div>
-        <button onClick={this.reloadItems.bind(this)}>Reload</button>
-        <button onClick={this.addItem.bind(this)}>Add</button>
-        <button onClick={this.removeItem.bind(this)}>Remove</button>
+      <div className="order-container">
+        <div className="item-btns">
+          <button>Edit</button>
+          <button onClick={this.addItem.bind(this)}>Add</button>
+          <button onClick={this.removeItem.bind(this)}>Remove</button>
+        </div>
         <ItemForm/>
         <ItemList items={this.state.items} />
       </div>
@@ -51,12 +64,13 @@ export default class InventoryItems extends React.Component{
 }
 class ItemList extends React.Component{
   render(){
+    console.log('inside child comp props render: ', this.props.items);
     const itemNodes = this.props.items.map((item) =>
       <Items
         key={item.id}
-        name={item.name}
+        title={item.title}
         type={item.type}
-        count={item.count} />
+        qty={item.qty}/>
     );
     return(
       <table>
@@ -64,7 +78,7 @@ class ItemList extends React.Component{
           <tr>
             <th>Name</th>
             <th>Type</th>
-            <th>Count</th>
+            <th>Quantity</th>
           </tr>
           {itemNodes}
         </tbody>
@@ -75,11 +89,11 @@ class ItemList extends React.Component{
 class ItemForm extends React.Component{
   render(){
     return(
-      <form action="/inventory" method="POST">
+      <form className="order-form">
         <input
           type="text"
           placeholder="Item Name"
-          name="name"
+          name="title"
         />
         <input
           type="text"
@@ -88,8 +102,8 @@ class ItemForm extends React.Component{
         />
         <input
           type="text"
-          placeholder="Count"
-          name="count"
+          placeholder="Quantity"
+          name="qty"
         />
         <button type="submit">Submit</button>
       </form>
