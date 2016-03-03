@@ -9,19 +9,17 @@ class ItemStore extends EventEmitter{
   loadItems(items){
     this.items = items;
     this.emit('change');
-    console.log('item store loadItems: ', this.items);
+    // TODO console.log('item store loadItems: ', this.items);
   }
-  addItem(title, type, qty){
-    const id = Date.now();
+  insertItem(){
     let idx = this.items.length + 1;
     this.items.unshift({
-      id,
       idx,
       title,
       type,
-      qty,
-      complete: false
+      qty
     });
+    console.log('ItemStore insertItem', items);
     this.emit('change');
   }
   removeItem(idx){
@@ -29,7 +27,7 @@ class ItemStore extends EventEmitter{
     this.emit('change');
   }
   getAll(){
-    console.log('item store getAll: ', this.items);
+    // TODO console.log('item store getAll: ', this.items);
     return this.items;
   }
   handleActions(action){
@@ -37,11 +35,12 @@ class ItemStore extends EventEmitter{
 
       case 'LOAD_ITEMS':{
         this.loadItems(action.items);
-        console.log('item store handleActions loadItems: ', this.items)
+        // TODO console.log('item store handleActions loadItems: ', this.items)
       }break;
 
-      case "ADD_ITEM":{
-        this.addItem(action.title, action.type, action.qty);
+      case 'INSERT_ITEMS':{
+        this.insertItem(action.title, action.type, action.qty);
+        console.log('item store handleActions insertItem: ', this.items)
       }break;
 
       case "REMOVE_ITEM": {

@@ -1,10 +1,10 @@
 
 exports.up = function(knex, Promise) {
-  return knex.schema.createTable('inventory', function (table) {
+  return knex.schema.createTable('items', function (table) {
     table.increments();
-    table.string('name');
+    table.string('title');
     table.string('type');
-    table.integer('count');
+    table.integer('qty');
     table.timestamps();
   })
 };

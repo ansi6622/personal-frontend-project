@@ -18,11 +18,11 @@ export default class InventoryItems extends React.Component{
     super();
     this.getItems = this.getItems.bind(this);
     this.state = { items: [] };
-    console.log('comp initial state: ', this.state.items);
+    // TODO console.log('constructor state: ', this.state.items);
   }
   componentWillMount(){
     ItemStore.on('change', this.getItems);
-    console.log('comp will mount: ', this.state.items);
+    // TODO console.log('compWillMount state: ', this.state.items);
   }
   componentWillUnmount(){
     ItemStore.removeListener("change", this.getItems);
@@ -31,7 +31,7 @@ export default class InventoryItems extends React.Component{
       this.setState({
         items: this.loadItems()
       });
-    console.log('comp did mount: ', this.state.items);
+    // TODO console.log('compDidMount state: ', this.state.items);
   }
   getItems(){
     this.setState({
@@ -41,22 +41,21 @@ export default class InventoryItems extends React.Component{
   loadItems(){
     ItemActions.loadItems();
   }
-  addItem(){
-    ItemActions.addItem('Chicken Wings', 'BBQ', 50);
-  }
   removeItem(idx){
     ItemActions.removeItem(idx);
   }
+  //handleItemSubmit(){
+  //  ItemStore.on('change', this.getItems);
+  //}
   render(){
-    console.log('inside comp state render: ', this.state.items);
+    // TODO console.log('InventoryItems render: ', this.state.items);
     return(
       <div className="order-container">
         <div className="item-btns">
           <button>Edit</button>
-          <button onClick={this.addItem.bind(this)}>Add</button>
           <button onClick={this.removeItem.bind(this)}>Remove</button>
         </div>
-        <ItemForm/>
+        <ItemForm onItemSubmit={this.getItems.bind(this)} />
         <ItemList items={this.state.items} />
       </div>
     )
@@ -64,7 +63,7 @@ export default class InventoryItems extends React.Component{
 }
 class ItemList extends React.Component{
   render(){
-    console.log('inside child comp props render: ', this.props.items);
+    // TODO console.log('ItemList props: ', this.props.items);
     const itemNodes = this.props.items.map((item) =>
       <Items
         key={item.id}
@@ -87,23 +86,46 @@ class ItemList extends React.Component{
   }
 }
 class ItemForm extends React.Component{
+  constructor(){
+    super();
+    this.state = {title: '', type: '', qty: ''}
+  }
+  handleTitleChange(e){
+    this.setState({title: e.target.value});
+  }
+  handleTypeChange(e){
+    this.setState({type: e.target.value});
+  }
+  handleQTYChange(e){
+    this.setState({qty: e.target.value});
+  }
+  handleSubmit(e){
+    //e.preventDefault();
+  }
   render(){
+    //onSubmit={this.handleSubmit.bind(this)}
     return(
-      <form className="order-form">
+      <form className="order-form" action="/insert-item" method="POST" onSubmit={this.handleSubmit.bind(this)}>
         <input
           type="text"
           placeholder="Item Name"
           name="title"
+          value={this.state.title}
+          onChange={this.handleTitleChange.bind(this)}
         />
         <input
           type="text"
           placeholder="Type"
           name="type"
+          value={this.state.type}
+          onChange={this.handleTypeChange.bind(this)}
         />
         <input
           type="text"
           placeholder="Quantity"
           name="qty"
+          value={this.state.qty}
+          onChange={this.handleQTYChange.bind(this)}
         />
         <button type="submit">Submit</button>
       </form>

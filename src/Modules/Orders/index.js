@@ -57,6 +57,9 @@ export default class Orders extends React.Component {
     this.loadOrders();
     setInterval(this.loadOrders.bind(this), this.props.pollInterval);
   }
+  componentWillUnmount(){
+
+  }
   render(){
     return(
       <div className="order-container">
