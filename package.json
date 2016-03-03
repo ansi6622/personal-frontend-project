@@ -44,8 +44,7 @@
     "react-dom": "^0.14.6",
     "react-router": "^2.0.0",
     "router": "^1.1.4",
-    "webpack": "^1.12.9",
-    "webpack-dev-server": "^1.14.1"
+    "webpack": "^1.12.9"
   },
   "description": ""
 }
