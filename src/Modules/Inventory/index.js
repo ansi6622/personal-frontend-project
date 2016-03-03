@@ -13,12 +13,20 @@ class Items extends React.Component {
     )
   }
 }
-export default class InventoryItems extends React.Component{
+export default class InventoryManager extends React.Component{
   constructor(){
     super();
     this.getItems = this.getItems.bind(this);
+    this.loadItems = this.loadItems.bind(this);
     this.state = { items: [] };
     // TODO console.log('constructor state: ', this.state.items);
+  }
+  componentDidMount(){
+    this.setState({
+      items: this.loadItems()
+    });
+    //  TODO  I can only get data to load in this
+    // console.log('compDidMount state: ', this.state.items);
   }
   componentWillMount(){
     ItemStore.on('change', this.getItems);
@@ -27,35 +35,38 @@ export default class InventoryItems extends React.Component{
   componentWillUnmount(){
     ItemStore.removeListener("change", this.getItems);
   }
-  componentDidMount(){
-      this.setState({
-        items: this.loadItems()
-      });
-    // TODO console.log('compDidMount state: ', this.state.items);
-  }
   getItems(){
     this.setState({
       items: ItemStore.getAll()
     })
   }
   loadItems(){
-    ItemActions.loadItems();
+    this.setState({
+      items: ItemActions.loadItems()
+    });
+  }
+  insertItem(title, type, qty){
+    console.log('insertItem items: ', title, type, qty);
+    // TODO ItemActions.insertItem(title, type, qty);
   }
   removeItem(idx){
     ItemActions.removeItem(idx);
   }
-  //handleItemSubmit(){
-  //  ItemStore.on('change', this.getItems);
-  //}
+  handleItemSubmit(items){
+    let item = this.state.items;
+    let newItem = item.concat({items});
+    this.setState({items: newItem});
+    console.log(newItem);
+    this.insertItem(item.title, item.type, item.qty);
+  }
   render(){
     // TODO console.log('InventoryItems render: ', this.state.items);
     return(
       <div className="order-container">
         <div className="item-btns">
-          <button>Edit</button>
           <button onClick={this.removeItem.bind(this)}>Remove</button>
         </div>
-        <ItemForm onItemSubmit={this.getItems.bind(this)} />
+        <ItemForm onItemSubmit={this.handleItemSubmit.bind(this)} />
         <ItemList items={this.state.items} />
       </div>
     )
@@ -91,21 +102,36 @@ class ItemForm extends React.Component{
     this.state = {title: '', type: '', qty: ''}
   }
   handleTitleChange(e){
-    this.setState({title: e.target.value});
+    if(e.target.value.match(/\\d+$/))
+      alert('hello');
+    else
+      this.setState({title: e.target.value});
   }
   handleTypeChange(e){
-    this.setState({type: e.target.value});
+    if(e.target.value.match(/\\d+$/))
+      alert('hello');
+    else
+      this.setState({type: e.target.value});
   }
   handleQTYChange(e){
+    if(e.target.value.match(/[a-zA-Z\s]+/))
+      alert('hello');
+    else
     this.setState({qty: e.target.value});
   }
   handleSubmit(e){
-    //e.preventDefault();
+    e.preventDefault();
+    let title   = this.state.title;
+    let type = this.state.type;
+    let qty  = this.state.qty;
+    if(!qty || !type || !title) return;
+    console.log('handleSubmit item state: ', title, type, qty);
+    this.props.onItemSubmit({title: title, type: type, qty: qty});
+    this.setState({title: '', type: '', qty: ''})
   }
   render(){
-    //onSubmit={this.handleSubmit.bind(this)}
     return(
-      <form className="order-form" action="/insert-item" method="POST" onSubmit={this.handleSubmit.bind(this)}>
+      <form className="order-form" action="/insert-item" method="POST">
         <input
           type="text"
           placeholder="Item Name"

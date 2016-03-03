@@ -11,14 +11,8 @@ class ItemStore extends EventEmitter{
     this.emit('change');
     // TODO console.log('item store loadItems: ', this.items);
   }
-  insertItem(){
-    let idx = this.items.length + 1;
-    this.items.unshift({
-      idx,
-      title,
-      type,
-      qty
-    });
+  insertItem(items){
+    this.items = items;
     console.log('ItemStore insertItem', items);
     this.emit('change');
   }
@@ -31,15 +25,15 @@ class ItemStore extends EventEmitter{
     return this.items;
   }
   handleActions(action){
-    switch(action.pass){
+    switch(action.source){
 
       case 'LOAD_ITEMS':{
         this.loadItems(action.items);
         // TODO console.log('item store handleActions loadItems: ', this.items)
       }break;
 
-      case 'INSERT_ITEMS':{
-        this.insertItem(action.title, action.type, action.qty);
+      case 'INSERT_ITEM':{
+        this.insertItem(action.items);
         console.log('item store handleActions insertItem: ', this.items)
       }break;
 

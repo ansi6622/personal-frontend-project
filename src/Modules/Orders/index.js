@@ -45,6 +45,7 @@ export default class Orders extends React.Component {
       method: 'POST',
       data: order,
       success: (data) => {
+        console.log(data);
         this.setState({data: data});
       },
       error: (status, err) => {
@@ -55,10 +56,11 @@ export default class Orders extends React.Component {
   }
   componentWillMount(){
     this.loadOrders();
-    setInterval(this.loadOrders.bind(this), this.props.pollInterval);
+    const intervalId = setInterval(this.loadOrders.bind(this), this.props.pollInterval);
+    this.setState({intervalId})
   }
   componentWillUnmount(){
-
+    clearInterval(this.state.intervalId)
   }
   render(){
     return(
@@ -115,8 +117,7 @@ class OrderForm extends React.Component {
   }
   render(){
     return(
-      <form className="order-form"
-            onSubmit={this.handleSubmit.bind(this)}>
+      <form className="order-form" onSubmit={this.handleSubmit.bind(this)}>
         <input
           type="text"
           placeholder="Item Name"
