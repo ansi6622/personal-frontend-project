@@ -1,3 +1,4 @@
+process.env.DATABASE_URL || require('./.env')
 var fs = require('fs');
 var path = require('path');
 var express = require('express');
