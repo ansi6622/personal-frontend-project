@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var knex = require('knex')(require('../knexfile')['development']);
+var knex = require('knex')(require('../knexfile')['production']);
 
 router.get('/get-items', function(req,res,next){
   knex.select().table('items').then(function(rows) {
