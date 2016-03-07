@@ -1,11 +1,10 @@
 .item-btns{
-  width: 140px;
+  width: 70px;
   margin: 0 auto;
 
   button{
-    //display: block;
     text-align: center;
-    width: 70px;
+    width: inherit;
     height: 30px;
     margin: 0 auto;
   }

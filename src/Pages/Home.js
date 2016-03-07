@@ -1,10 +1,9 @@
 import React from 'react';
 
 import Orders from '../Modules/Orders/index';
-import Timer from '../Modules/Mixin/index';
+import Timer from '../Modules/Timer/index';
 
 export default class Home extends React.Component {
-  
   render(){
     return(
       <div>
