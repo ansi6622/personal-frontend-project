@@ -7,10 +7,9 @@ import Navigation from './Navigation/index';
 
 export default class Layout extends React.Component {
   render(){
-    const title = "Cash Register";
     return(
       <div>
-        <Header title={title}/>
+        <Header />
         <Navigation />
         <Content children={this.props.children}/>
         <Footer/>

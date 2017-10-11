@@ -16,8 +16,8 @@ class Order extends React.Component {
   }
 }
 export default class Orders extends React.Component {
-  constructor(props){
-    super(props);
+  constructor(){
+    super();
     this.state ={ data: [] };
   }
   loadOrders(){
@@ -45,6 +45,7 @@ export default class Orders extends React.Component {
       method: 'POST',
       data: order,
       success: (data) => {
+        console.log(data);
         this.setState({data: data});
       },
       error: (status, err) => {
@@ -53,9 +54,13 @@ export default class Orders extends React.Component {
       }
     })
   }
-  componentDidMount(){
+  componentWillMount(){
     this.loadOrders();
-    // TODO setInterval(this.loadOrders, this.props.pollInterval);
+    const intervalId = setInterval(this.loadOrders.bind(this), this.props.pollInterval);
+    this.setState({intervalId})
+  }
+  componentWillUnmount(){
+    clearInterval(this.state.intervalId)
   }
   render(){
     return(
@@ -73,7 +78,7 @@ class OrderList extends React.Component {
         name={order.item.name}
         option={order.item.option}
         price={order.item.price}
-        key={order.id}  >
+        key={i}  >
       </Order>
     );
     return(
@@ -112,23 +117,25 @@ class OrderForm extends React.Component {
   }
   render(){
     return(
-      <form className="order-form"
-            onSubmit={this.handleSubmit.bind(this)}>
+      <form className="order-form" onSubmit={this.handleSubmit.bind(this)}>
         <input
           type="text"
           placeholder="Item Name"
+          name="name"
           value={this.state.name}
           onChange={this.handleItemChange.bind(this)}
         />
         <input
           type="text"
           placeholder="Option"
+          name="option"
           value={this.state.option}
           onChange={this.handleOptionChange.bind(this)}
         />
         <input
           type="text"
           placeholder="Price"
+          name="price"
           value={this.state.price}
           onChange={this.handlePriceChange.bind(this)}
         />
